@@ -1,5 +1,5 @@
 $bar-color: #b8c2cc !default;
-$bar-stroke: #8D99A6 !default;
+$bar-stroke: #8d99a6 !default;
 $border-color: #e0e0e0 !default;
 $light-bg: #f5f5f5 !default;
 $light-border-color: #ebeff2 !default;
@@ -50,7 +50,7 @@ $handle-color: #ddd !default;
 		fill: $bar-color;
 		stroke: $bar-stroke;
 		stroke-width: 0;
-		transition: stroke-width .3s ease;
+		transition: stroke-width 0.3s ease;
 		user-select: none;
 	}
 	.bar-progress {
@@ -62,7 +62,7 @@ $handle-color: #ddd !default;
 		stroke-width: 1;
 		stroke-dasharray: 5;
 
-		&~.bar-label {
+		& ~ .bar-label {
 			fill: $text-light;
 		}
 	}
@@ -84,12 +84,15 @@ $handle-color: #ddd !default;
 		cursor: ew-resize;
 		opacity: 0;
 		visibility: hidden;
-		transition: opacity .3s ease;
+		transition: opacity 0.3s ease;
 	}
 
 	.bar-wrapper {
-		cursor: pointer;
 		outline: none;
+
+		&.cursor-pointer {
+			cursor: pointer;
+		}
 
 		&:hover {
 			.bar {
@@ -117,7 +120,8 @@ $handle-color: #ddd !default;
 		}
 	}
 
-	.lower-text, .upper-text {
+	.lower-text,
+	.upper-text {
 		font-size: 12px;
 		text-anchor: middle;
 	}

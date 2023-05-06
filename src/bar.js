@@ -35,7 +35,10 @@ export default class Bar {
                 this.duration *
                 (this.task.progress / 100) || 0;
         this.group = createSVG('g', {
-            class: 'bar-wrapper ' + (this.task.custom_class || ''),
+            class:
+                'bar-wrapper ' +
+                (this.task.custom_class || '') +
+                (this.gantt.options.read_only ? '' : ' cursor-pointer '),
             'data-id': this.task.id,
         });
         this.bar_group = createSVG('g', {
@@ -94,6 +97,7 @@ export default class Bar {
 
     draw_progress_bar() {
         if (this.invalid) return;
+        if (this.gantt.read_only) return;
         this.$bar_progress = createSVG('rect', {
             x: this.x,
             y: this.y,
@@ -122,6 +126,7 @@ export default class Bar {
 
     draw_resize_handles() {
         if (this.invalid) return;
+        if (this.gantt.options.read_only) return;
 
         const bar = this.$bar;
         const handle_width = 8;

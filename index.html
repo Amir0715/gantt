@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Simple Gantt</title>
@@ -8,14 +9,17 @@
 			font-family: sans-serif;
 			background: #ccc;
 		}
+
 		.container {
 			width: 80%;
 			margin: 0 auto;
 		}
+
 		/* custom class */
 		.gantt .bar-milestone .bar {
 			fill: tomato;
 		}
+
 		.heading {
 			text-align: center;
 		}
@@ -23,10 +27,12 @@
 	<link rel="stylesheet" href="dist/frappe-gantt.css" />
 	<script src="dist/frappe-gantt.js"></script>
 </head>
+
 <body>
 	<div class="container">
 		<h2 class="heading">Interactive Gantt Chart entirely made in SVG!</h2>
 		<div class="gantt-target"></div>
+		<div class="gantt-target-read-only"></div>
 	</div>
 	<script>
 		var tasks = [
@@ -77,13 +83,6 @@
 				progress: 0,
 				dependencies: 'Task 4',
 				custom_class: 'bar-milestone'
-			},
-			{
-				start: '2014-01-05',
-				end: '2019-10-12',
-				name: 'Long term task',
-				id: "Task 6",
-				progress: 0
 			}
 		]
 		var gantt_chart = new Gantt(".gantt-target", tasks, {
@@ -99,10 +98,29 @@
 			on_view_change: (mode) => {
 				console.log(mode);
 			},
-			view_mode: 'Month',
-			language: 'en'
+			view_mode: 'Day',
+			language: 'en',
+			read_only: false
+		});
+		var gantt_chart_read_only = new Gantt(".gantt-target-read-only", tasks, {
+			on_click: task => {
+				console.log(task);
+			},
+			on_date_change: (task, start, end) => {
+				console.log(task, start, end);
+			},
+			on_progress_change: (task, progress) => {
+				console.log(task, progress);
+			},
+			on_view_change: (mode) => {
+				console.log(mode);
+			},
+			view_mode: 'Day',
+			language: 'en',
+			read_only: true
 		});
 		console.log(gantt_chart);
 	</script>
 </body>
+
 </html>

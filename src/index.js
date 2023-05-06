@@ -87,6 +87,7 @@ export default class Gantt {
             popup_trigger: 'click',
             custom_popup_html: null,
             language: 'en',
+            read_only: false,
         };
         this.options = Object.assign({}, default_options, options);
     }
@@ -661,6 +662,8 @@ export default class Gantt {
         }
 
         $.on(this.$svg, 'mousedown', '.bar-wrapper, .handle', (e, element) => {
+            if (this.options.read_only) return;
+
             const bar_wrapper = $.closest('.bar-wrapper', element);
 
             if (element.classList.contains('left')) {
@@ -758,6 +761,7 @@ export default class Gantt {
         let $bar = null;
 
         $.on(this.$svg, 'mousedown', '.handle.progress', (e, handle) => {
+            if (this.options.read_only) return;
             is_resizing = true;
             x_on_start = e.offsetX;
             y_on_start = e.offsetY;
